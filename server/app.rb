@@ -14,13 +14,22 @@ module Application
       end
 
       get '/people' do
-        gateway = Application::People::Gateway.new @api_token
-        people = gateway.get
+        page = params[:page]&.to_i || 1
+        per_page = params[:per_page]&.to_i || 25
 
-        people.to_json
-      rescue Application::People::Unauthorized => error
+        gateway = Application::People::Gateway.new @api_token
+        people = gateway.get page: page, per_page: per_page
+
+        {
+          results: people,
+          page: page,
+          per_page: per_page,
+        }.to_json
+      rescue Application::People::Unauthorized
         [401, {}, 'Access to API unauthorized. Please contact your system administrator']
       rescue Application::People::GatewayError => error
+        puts 'si hubo pedo entonces'
+        puts error
         [500]
       end
 

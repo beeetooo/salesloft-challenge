@@ -31,20 +31,24 @@ module Application
         stub_request(:get, TEST_URL)
           .with(
             headers: { Authorization: AUTH_HEADER },
-            query: { page: 1, per_page: 25 }
+            query: { page: 1, per_page: 1 }
           )
             .to_return(body: MOCK_RESPONSE.to_json)
 
-        get '/people'
+        get '/people', params={ page: 1, per_page: 1 }
 
         assert last_response.ok?
         assert_equal(
-          [{
-            id: 101693889,
-            name: 'Orlando Stanton',
-            email: 'katrina_langosh@kozey.io',
-            title: 'Regional Factors Specialist'
-          }].to_json,
+          {
+            results: [{
+              id: 101693889,
+              name: 'Orlando Stanton',
+              email: 'katrina_langosh@kozey.io',
+              title: 'Regional Factors Specialist'
+            }],
+            page: 1,
+            per_page: 1
+          }.to_json,
           last_response.body
         )
       end
