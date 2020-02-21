@@ -1,4 +1,5 @@
 $LOAD_PATH << File.join(File.dirname(__FILE__), '..')
+$stdout.sync = true
 require 'sinatra/base'
 require 'json'
 
@@ -20,6 +21,7 @@ module Application
       rescue Application::People::Unauthorized => error
         [401, {}, 'Access to API unauthorized. Please contact your system administrator']
       rescue Application::People::GatewayError => error
+        puts error
         [500]
       end
 

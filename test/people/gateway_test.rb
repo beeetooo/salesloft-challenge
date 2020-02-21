@@ -1,5 +1,5 @@
 require 'test_helper'
-require 'faraday'
+require 'json'
 
 require 'application/people/gateway'
 
@@ -7,23 +7,26 @@ module Application
   module People
     class GatewayTest < Minitest::Test
       TEST_URL = 'https://api.salesloft.com/v2/people.json'
+      AUTH_HEADER = 'Bearer fake-token'
       TOKEN = 'fake-token'
-      MOCK_RESPONSE = [{
-        id: 101693889,
-        created_at: '2018-03-13T00:39:59.820272-04:00',
-        updated_at: '2018-03-13T00:39:59.820272-04:00',
-        display_name: 'Orlando Stanton',
-        email_address: 'katrina_langosh@kozey.io',
-        title: 'Regional Factors Specialist'
-      }]
+      MOCK_RESPONSE = {
+        data: [{
+          id: 101693889,
+          created_at: '2018-03-13T00:39:59.820272-04:00',
+          updated_at: '2018-03-13T00:39:59.820272-04:00',
+          display_name: 'Orlando Stanton',
+          email_address: 'katrina_langosh@kozey.io',
+          title: 'Regional Factors Specialist'
+        }]
+      }
 
       def test_get_people
         stub_request(:get, TEST_URL)
           .with(
-            headers: { Authorization: TOKEN },
+            headers: { Authorization: AUTH_HEADER },
             query: { page: 1, per_page: 25 }
           )
-          .to_return(body: MOCK_RESPONSE)
+          .to_return(body: MOCK_RESPONSE.to_json)
 
         gateway = Gateway.new TOKEN
 
@@ -38,7 +41,7 @@ module Application
       def test_unauthorized
         stub_request(:get, TEST_URL)
           .with(
-            headers: { Authorization: TOKEN },
+            headers: { Authorization: AUTH_HEADER },
             query: { page: 1, per_page: 25 }
           )
           .to_return(status: 401)
@@ -53,7 +56,7 @@ module Application
       def test_internal_server_error
         stub_request(:get, TEST_URL)
           .with(
-            headers: { Authorization: TOKEN },
+            headers: { Authorization: AUTH_HEADER },
             query: { page: 1, per_page: 25 }
           )
           .to_return(status: 500)
@@ -68,7 +71,7 @@ module Application
       def test_unexpected_error
         stub_request(:get, TEST_URL)
           .with(
-            headers: { Authorization: TOKEN },
+            headers: { Authorization: AUTH_HEADER },
             query: { page: 1, per_page: 25 }
           )
           .to_return(status: 404)
@@ -83,7 +86,7 @@ module Application
       def test_unexpected_response
         stub_request(:get, TEST_URL)
           .with(
-            headers: { Authorization: TOKEN },
+            headers: { Authorization: AUTH_HEADER },
             query: { page: 1, per_page: 25 }
           )
           .to_return(body: 'Im not an array')

@@ -1,3 +1,5 @@
+require 'faraday'
+
 module Application
   module People
     class GatewayError < StandardError; end
@@ -10,13 +12,16 @@ module Application
 
       def initialize(api_token)
         @api_token = api_token
+        @connection = Faraday.new do |connection|
+          connection.adapter Faraday.default_adapter
+        end
       end
 
       def get(page: 1, per_page: 25)
-        response = Faraday.get(
+        response = @connection.get(
           GET_URL,
           { page: page, per_page: per_page },
-          { Authorization: @api_token }
+          { Authorization: "Bearer #{@api_token}" }
         )
 
         if error? response
@@ -27,8 +32,9 @@ module Application
         end
 
         begin
-          parse response.body
-        rescue
+          json = JSON.parse response.body
+          parse json['data']
+        rescue => error
           raise UnexpectedResponse
         end
       end
@@ -36,10 +42,10 @@ module Application
       def parse(people)
         people.map do |person|
           {
-            id: person[:id],
-            name: person[:display_name],
-            email: person[:email_address],
-            title: person[:title],
+            id: person['id'],
+            name: person['display_name'],
+            email: person['email_address'],
+            title: person['title'],
           }
         end
       end
