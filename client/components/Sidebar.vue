@@ -64,7 +64,9 @@ export default {
 
 <style lang="scss">
 .sidebar {
-  width: 15%;
+  padding: 20px 0 0 0;
+  width: 20%;
+  border-right: 1px solid white;
 
   &__logo {
     width: 80px;

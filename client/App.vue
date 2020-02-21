@@ -23,11 +23,13 @@ export default {
 <style>
 html {
   background-color: #151618;
+  height: 100%;
 }
 
 body {
   width: 100%;
   height: 100%;
+  margin: 0;
 }
 
 #app {
@@ -37,6 +39,6 @@ body {
   text-align: center;
   color: #A9B6C0;
   display: flex;
-  padding: 20px 0 20px 0;
+  height: 100%;
 }
 </style>
