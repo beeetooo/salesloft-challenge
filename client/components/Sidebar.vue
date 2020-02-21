@@ -1,6 +1,6 @@
 <template>
   <section class="sidebar">
-    <img class="sidebar__logo" :src="logo">
+    <img class="sidebar__logo" :src="logo" />
     <ul class="sidebar__options">
       <li
         class="sidebar__option"
