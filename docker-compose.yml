@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  application:
+    build: .
+    env_file:
+      - envs/.env.development
+    command: sh runserver.sh
+    ports:
+      - '5000:4567'
+    volumes:
+      - '.:/app'
