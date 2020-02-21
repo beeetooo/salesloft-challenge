@@ -2,6 +2,7 @@
   <div id="app">
     <Sidebar />
     <div class="app__content">
+      <h1 class="app__content-title"> People </h1>
       <People />
     </div>
   </div>
@@ -20,7 +21,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 html {
   background-color: #151618;
   height: 100%;
@@ -34,8 +35,6 @@ body {
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #A9B6C0;
   display: flex;
@@ -44,5 +43,10 @@ body {
 
 .app__content {
   margin-left: 20%;
+}
+
+.app__content-title {
+  text-align: left;
+  margin-left: 24px;
 }
 </style>
