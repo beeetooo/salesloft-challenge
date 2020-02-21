@@ -2,20 +2,20 @@
   <div id="app">
     <Sidebar />
     <div class="app__content">
-      <HelloWorld msg="Welcome to Your Vue.js App"/>
+      <People />
     </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 import Sidebar from './components/Sidebar.vue'
+import People from './containers/People.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
     Sidebar,
+    People,
   }
 }
 </script>
