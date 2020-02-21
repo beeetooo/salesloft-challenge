@@ -60,13 +60,13 @@ The Entity Gateway will have the responsibility of fetching information from an 
 Watching an overall design of the back end system with the respective use cases:
 
 #### People List
-![alt text](images/list.png)
+![alt text](.images/list.png)
 
 #### Characters Frequency
-![alt text](images/frequency.png)
+![alt text](.images/frequency.png)
 
 #### Duplicated Emails
-![alt text](images/duplicated.png)
+![alt text](.images/duplicated.png)
 
 
 ### _Front End_
