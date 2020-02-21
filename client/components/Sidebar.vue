@@ -66,6 +66,8 @@ export default {
 .sidebar {
   padding: 20px 0 0 0;
   width: 20%;
+  height: 100%;
+  position: fixed;
   border-right: 1px solid white;
 
   &__logo {

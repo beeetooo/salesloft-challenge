@@ -41,4 +41,8 @@ body {
   display: flex;
   height: 100%;
 }
+
+.app__content {
+  margin-left: 20%;
+}
 </style>
