@@ -21,7 +21,6 @@ module Application
       rescue Application::People::Unauthorized => error
         [401, {}, 'Access to API unauthorized. Please contact your system administrator']
       rescue Application::People::GatewayError => error
-        puts error
         [500]
       end
 
