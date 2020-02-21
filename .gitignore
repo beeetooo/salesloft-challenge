@@ -1,2 +1,4 @@
+node_modules/
+
 envs/.env.development
 Gemfile.lock
