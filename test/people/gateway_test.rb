@@ -1,7 +1,7 @@
 require 'test_helper'
 require 'json'
 
-require 'application/people/gateway'
+require 'server/people/gateway'
 
 module Application
   module People

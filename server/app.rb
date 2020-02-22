@@ -5,7 +5,7 @@ require 'sinatra/base'
 require 'sinatra/cross_origin'
 require 'json'
 
-require 'application/people/gateway'
+require 'server/people/gateway'
 
 module Application
   module Server
