@@ -46,8 +46,19 @@ module Application
           { Authorization: "Bearer #{@api_token}" }
         )
 
-        json = JSON.parse response.body
-        parse json['data']
+        if error? response
+          raise Unauthorized if unauthorized? response
+          raise InternalServerError if server_error? response
+
+          raise GatewayError
+        end
+
+        begin
+          json = JSON.parse response.body
+          parse json['data']
+        rescue JSON::ParserError
+          raise UnexpectedResponse
+        end
       end
 
       private

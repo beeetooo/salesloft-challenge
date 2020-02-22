@@ -89,7 +89,7 @@ module Application
             headers: { Authorization: AUTH_HEADER },
             query: { page: 1, per_page: 25 }
           )
-          .to_return(body: 'Im not an array')
+          .to_return(body: 'Im not a valid answer')
 
         gateway = Gateway.new TOKEN
 
@@ -116,6 +116,66 @@ module Application
         assert_equal 'Orlando Stanton', first_person[:name]
         assert_equal 'katrina_langosh@kozey.io', first_person[:email]
         assert_equal 'Regional Factors Specialist', first_person[:title]
+      end
+
+      def test_unauthorized
+        stub_request(:get, TEST_URL)
+          .with(
+            headers: { Authorization: AUTH_HEADER },
+            query: { page: 1, per_page: 375 }
+          )
+          .to_return(status: 401)
+
+        gateway = Gateway.new TOKEN
+
+        assert_raises Unauthorized do
+          gateway.all
+        end
+      end
+
+      def test_internal_server_error
+        stub_request(:get, TEST_URL)
+          .with(
+            headers: { Authorization: AUTH_HEADER },
+            query: { page: 1, per_page: 375 }
+          )
+          .to_return(status: 500)
+
+        gateway = Gateway.new TOKEN
+
+        assert_raises InternalServerError do
+          gateway.all
+        end
+      end
+
+      def test_unexpected_error
+        stub_request(:get, TEST_URL)
+          .with(
+            headers: { Authorization: AUTH_HEADER },
+            query: { page: 1, per_page: 375 }
+          )
+          .to_return(status: 404)
+
+        gateway = Gateway.new TOKEN
+
+        assert_raises GatewayError do
+          gateway.all
+        end
+      end
+
+      def test_unexpected_response
+        stub_request(:get, TEST_URL)
+          .with(
+            headers: { Authorization: AUTH_HEADER },
+            query: { page: 1, per_page: 375 }
+          )
+          .to_return(body: 'Im not a valid answer')
+
+        gateway = Gateway.new TOKEN
+
+        assert_raises UnexpectedResponse do
+          gateway.all
+        end
       end
     end
   end
