@@ -39,6 +39,19 @@ module Application
         end
       end
 
+      def all
+        response = @connection.get(
+          GET_URL,
+          { page: 1, per_page: 375 },
+          { Authorization: "Bearer #{@api_token}" }
+        )
+
+        json = JSON.parse response.body
+        parse json['data']
+      end
+
+      private
+
       def parse(people)
         people.map do |person|
           {
