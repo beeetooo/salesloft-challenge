@@ -6,8 +6,6 @@ WORKDIR ${PROJECT_DIR}
 
 ADD . .
 
-RUN gem update --system
-RUN gem install bundler
 RUN bundle install --system
 
 CMD ./runserver.sh
