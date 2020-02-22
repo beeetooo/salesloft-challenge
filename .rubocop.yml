@@ -1,0 +1,17 @@
+Style/Encoding:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Layout/LineLength:
+  Max: 99
+
+Metrics/MethodLength:
+  Max: 40
+
+Style/NumericLiterals:
+  Enabled: false

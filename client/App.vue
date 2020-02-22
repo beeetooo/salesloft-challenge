@@ -2,7 +2,9 @@
   <div id="app">
     <Sidebar />
     <div class="app__content">
-      <h1 class="app__content-title"> People </h1>
+      <h1 class="app__content-title">
+        People
+      </h1>
       <People />
     </div>
   </div>

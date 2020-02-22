@@ -1,14 +1,11 @@
 module.exports = {
-  "root": true,
-  "env": {
-    "node": true
-  },
-  "extends": [
-    "plugin:vue/essential",
-    "eslint:recommended"
+  extends: [
+    // add more generic rulesets here, such as:
+    // 'eslint:recommended',
+    'plugin:vue/recommended'
   ],
-  "parserOptions": {
-    "parser": "babel-eslint"
-  },
-  "rules": {}
-};
+  rules: {
+    // override/add rules settings here, such as:
+    // 'vue/no-unused-vars': 'error'
+  }
+}

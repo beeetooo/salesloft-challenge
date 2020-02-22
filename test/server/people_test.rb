@@ -7,9 +7,9 @@ require 'server/app'
 module Application
   module Server
     class PeopleTest < Minitest::Test
-      TEST_URL = 'https://api.salesloft.com/v2/people.json'
-      AUTH_HEADER = 'Bearer fake-token'
-      TOKEN = 'fake-token'
+      TEST_URL = 'https://api.salesloft.com/v2/people.json'.freeze
+      AUTH_HEADER = 'Bearer fake-token'.freeze
+      TOKEN = 'fake-token'.freeze
       MOCK_RESPONSE = {
         data: [{
           id: 101693889,
@@ -19,7 +19,7 @@ module Application
           email_address: 'katrina_langosh@kozey.io',
           title: 'Regional Factors Specialist'
         }]
-      }
+      }.freeze
 
       include Rack::Test::Methods
 
@@ -33,9 +33,9 @@ module Application
             headers: { Authorization: AUTH_HEADER },
             query: { page: 1, per_page: 1 }
           )
-            .to_return(body: MOCK_RESPONSE.to_json)
+          .to_return(body: MOCK_RESPONSE.to_json)
 
-        get '/people', params={ page: 1, per_page: 1 }
+        get '/people', { page: 1, per_page: 1 }
 
         assert last_response.ok?
         assert_equal(

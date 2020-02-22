@@ -1,7 +1,9 @@
 <template>
   <div class="person">
     <div class="person__circle">
-      <p class="person__first-letter">{{ name[0] }} </p>
+      <p class="person__first-letter">
+        {{ name[0] }}
+      </p>
     </div>
     <div class="person__meta">
       <span class="person__name"> {{ name }} </span>

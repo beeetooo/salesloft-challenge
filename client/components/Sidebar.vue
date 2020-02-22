@@ -66,6 +66,7 @@ export default {
 .sidebar {
   padding: 20px 0 0 0;
   width: 20%;
+  min-width: 200px;
   height: 100%;
   position: fixed;
   border-right: 1px solid white;

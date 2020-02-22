@@ -6,9 +6,9 @@ require 'application/people/gateway'
 module Application
   module People
     class GatewayTest < Minitest::Test
-      TEST_URL = 'https://api.salesloft.com/v2/people.json'
-      AUTH_HEADER = 'Bearer fake-token'
-      TOKEN = 'fake-token'
+      TEST_URL = 'https://api.salesloft.com/v2/people.json'.freeze
+      AUTH_HEADER = 'Bearer fake-token'.freeze
+      TOKEN = 'fake-token'.freeze
       MOCK_RESPONSE = {
         data: [{
           id: 101693889,
@@ -18,7 +18,7 @@ module Application
           email_address: 'katrina_langosh@kozey.io',
           title: 'Regional Factors Specialist'
         }]
-      }
+      }.freeze
 
       def test_get_people
         stub_request(:get, TEST_URL)

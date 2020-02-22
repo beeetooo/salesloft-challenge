@@ -8,7 +8,7 @@ module Application
     class UnexpectedResponse < GatewayError; end
 
     class Gateway
-      GET_URL = 'https://api.salesloft.com/v2/people.json?'
+      GET_URL = 'https://api.salesloft.com/v2/people.json?'.freeze
 
       def initialize(api_token)
         @api_token = api_token
@@ -34,7 +34,7 @@ module Application
         begin
           json = JSON.parse response.body
           parse json['data']
-        rescue => error
+        rescue JSON::ParserError
           raise UnexpectedResponse
         end
       end
@@ -45,7 +45,7 @@ module Application
             id: person['id'],
             name: person['display_name'],
             email: person['email_address'],
-            title: person['title'],
+            title: person['title']
           }
         end
       end
