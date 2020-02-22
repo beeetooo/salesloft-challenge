@@ -13,6 +13,7 @@
     </div>
 
     <Paginator
+      :page="page"
       :disable-previous="disablePrevious"
       :disable-next="disableNext"
       @previous="fetchPreviousPage"
@@ -38,7 +39,7 @@ export default {
   data: function () {
     return {
       people: [],
-      page: 59,
+      page: 1,
       perPage: 6,
     };
   },

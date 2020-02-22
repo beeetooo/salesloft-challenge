@@ -1,5 +1,6 @@
 <template>
   <div class="paginator">
+    <p> Page: {{ page }} </p>
     <button
       class="paginator__button"
       :disabled="disablePrevious"
@@ -22,6 +23,10 @@ export default {
   name: 'Paginator',
 
   props: {
+    page: {
+      type: Number,
+      required: true
+    },
     disablePrevious: {
       type: Boolean,
       required: true
