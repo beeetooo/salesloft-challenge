@@ -1,6 +1,8 @@
 $LOAD_PATH << File.join(File.dirname(__FILE__), '..')
 $stdout.sync = true
+
 require 'sinatra/base'
+require 'sinatra/cross_origin'
 require 'json'
 
 require 'application/people/gateway'
@@ -8,6 +10,16 @@ require 'application/people/gateway'
 module Application
   module Server
     class App < Sinatra::Application
+      set :bind, '0.0.0.0'
+
+      configure do
+        enable :cross_origin
+      end
+
+      before do
+        response.headers['Access-Control-Allow-Origin'] = '*'
+      end
+
       def initialize(config = {})
         super
         @api_token = config[:api_token]
@@ -34,6 +46,13 @@ module Application
       end
 
       get "/favicon.ico" do
+      end
+
+      options "*" do
+        response.headers["Allow"] = "GET, PUT, POST, DELETE, OPTIONS"
+        response.headers["Access-Control-Allow-Headers"] = "Authorization, Content-Type, Accept, X-User-Email, X-Auth-Token"
+        response.headers["Access-Control-Allow-Origin"] = "*"
+        200
       end
     end
   end

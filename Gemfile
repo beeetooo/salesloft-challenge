@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'sinatra'
 gem 'faraday'
 gem 'faraday_middleware'
+gem 'sinatra-cross_origin'
 
 group :test do
   gem 'minitest', '~> 5.10.3'
