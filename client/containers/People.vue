@@ -13,6 +13,7 @@
 
 <script>
 import Person from '../components/Person.vue'
+import axios from 'axios';
 
 export default {
   name: 'People',
@@ -21,53 +22,13 @@ export default {
 
   data: function () {
     return {
-      people: [{
-        id: 1,
-        name: 'Peter Jackson',
-        title: 'NASA Engineer',
-        email: 'email@email.com',
-      }, {
-        id: 1,
-        name: 'Peter Jackson',
-        title: 'NASA Engineer',
-        email: 'email@email.com',
-      }, {
-        id: 1,
-        name: 'Peter Jackson',
-        title: 'NASA Engineer',
-        email: 'email@email.com',
-      }, {
-        id: 1,
-        name: 'Peter Jackson',
-        title: 'NASA Engineer',
-        email: 'email@email.com',
-      }, {
-        id: 1,
-        name: 'Peter Jackson',
-        title: 'NASA Engineer',
-        email: 'email@email.com',
-      }, {
-        id: 1,
-        name: 'Peter Jackson',
-        title: 'NASA Engineer',
-        email: 'thisiskindofalongemail@email.com',
-      }, {
-        id: 1,
-        name: 'Peter Jackson',
-        title: 'NASA Engineer',
-        email: 'email@email.com',
-      }, {
-        id: 1,
-        name: 'Peter Jackson',
-        title: 'NASA Engineer',
-        email: 'email@email.com',
-      }, {
-        id: 1,
-        name: 'Peter Jackson',
-        title: 'NASA Engineer',
-        email: 'thisiskindofalongemail@email.com',
-      }],
+      people: [],
     };
+  },
+
+  mounted: async function () {
+    const response = await axios.get('http://localhost:5000/people?page=1&per_page=6');
+    this.people = response.data.results;
   }
 }
 </script>
@@ -77,10 +38,11 @@ export default {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .people__person {
   width: 280px;
-  margin: 24px;
+  margin: 24px 24px 16px 24px;
 }
 </style>
