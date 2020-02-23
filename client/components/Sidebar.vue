@@ -36,26 +36,31 @@ import Logo from '../assets/logo.png';
 export default {
   name: 'Sidebar',
 
+  props: {
+    active: {
+      type: String,
+      required: true,
+      default: 'people'
+    }
+  },
+
   data: function () {
     return {
       logo: Logo,
-      active: 'people',
     };
   },
 
   methods: {
     showPeople: function () {
-      this.active = 'people';
       this.$emit('showPeople');
     },
 
     showFrequency: function () {
-      this.active = 'frequency';
+      console.warn('si sera eda?')
       this.$emit('showFrequency');
     },
 
     showDuplicated: function () {
-      this.active = 'duplicated';
       this.$emit('showDuplicated');
     },
   }
