@@ -7,6 +7,6 @@ services:
       - envs/.env.development
     command: sh runserver.sh
     ports:
-      - '5000:4567'
+      - '5000:5000'
     volumes:
       - '.:/app'
