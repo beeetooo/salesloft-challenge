@@ -3,7 +3,8 @@ import actions from './actions';
 export default {
   state: {
     people: [],
-    loading: false,
+    page: 1,
+    perPage: 6,
   },
   actions,
 };
