@@ -1,3 +1,6 @@
+![Front End Tests](https://github.com/beeetooo/salesloft-challenge/workflows/Front%20End%20Tests/badge.svg?branch=master)
+![Back End Tests](https://github.com/beeetooo/salesloft-challenge/workflows/Ruby/badge.svg?branch=master)
+
 # Technical Spec
 
 ## Goals
