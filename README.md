@@ -1,6 +1,46 @@
 ![Front End Tests](https://github.com/beeetooo/salesloft-challenge/workflows/Front%20End%20Tests/badge.svg?branch=master)
 ![Back End Tests](https://github.com/beeetooo/salesloft-challenge/workflows/Ruby/badge.svg?branch=master)
 
+# Setup
+1. Create an `.env.development` file under the `envs` folder
+1. Set the authorization token for the SalesLoft API
+
+## Running the Back End
+There are two possible ways to run the back end
+1. `docker-compose`: You can run `docker-compose` up and the back end will be exposed at port 5000
+2. Setup the environment in your local machine
+```sh
+$ brew install rbenv
+$ rbenv install 2.5.1
+$ gem install bundle
+$ bundle install
+$ ./runserver.sh
+```
+
+## Running the Front End
+```sh
+$ npm install
+$ npm run serve
+```
+
+## Running the tests for back end
+```sh
+$ docker-compose run application bundle exec rake
+```
+
+or
+
+```sh
+bundle exec rake
+```
+
+## Running the tests for front end
+```sh
+$ npm run test:unit
+```
+
+From now on, I'll explain my initial train of thinking to solve this problem.  I did this small technical spec first to decompose the problem and organize what needed to be done, and then I created the tasks I needed to do as a [Github Project](https://github.com/beeetooo/salesloft-challenge/projects/1).
+
 # Technical Spec
 
 ## Goals
