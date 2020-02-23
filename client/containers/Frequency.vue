@@ -4,7 +4,7 @@
       Frequency
     </h1>
     <p v-if="isLoading">
-      Loading...
+      Loading... (This may take time)
     </p>
     <div
       v-else
@@ -41,9 +41,12 @@ export default {
   },
 
   mounted: async function () {
+    this.isLoading = true;
+
     const response = await axios.get('http://localhost:5000/frequency');
 
     this.data = response.data.result;
+    this.isLoading = false;
   }
 }
 </script>
