@@ -37,7 +37,7 @@ export default {
 <style lang="scss">
 .person {
   padding: 12px 0 12px 0;
-  background-color: #161718;
+  background-color: #21252D;
   border-radius: 4px;
 
   display: flex;
