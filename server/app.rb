@@ -26,6 +26,10 @@ module Application
         @api_token = config[:api_token]
       end
 
+      get '/' do
+        'Hello!'
+      end
+
       get '/people' do
         page = params[:page]&.to_i || 1
         per_page = params[:per_page]&.to_i || 25
