@@ -39,10 +39,10 @@ module Application
         end
       end
 
-      def all
+      def all(page = 1)
         response = @connection.get(
           GET_URL,
-          { page: 1, per_page: 375 },
+          { page: page, per_page: 100 },
           { Authorization: "Bearer #{@api_token}" }
         )
 
@@ -55,7 +55,13 @@ module Application
 
         begin
           json = JSON.parse response.body
-          parse json['data']
+          response = parse json['data']
+
+          if response.size == 100
+            response + all(page + 1)
+          else
+            response
+          end
         rescue JSON::ParserError
           raise UnexpectedResponse
         end

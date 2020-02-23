@@ -38,7 +38,7 @@ module Application
         stub_request(:get, TEST_URL)
           .with(
             headers: { Authorization: AUTH_HEADER },
-            query: { page: 1, per_page: 375 }
+            query: { page: 1, per_page: 100 }
           )
           .to_return(body: MOCK_RESPONSE.to_json)
 

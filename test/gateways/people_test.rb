@@ -99,12 +99,38 @@ module Application
       end
     end
 
-    class GetAllPeopleTest < Minitest::Test
-      def test_get_all
+    class GetAllPeopleTest < Minitest::Test # rubocop:disable Metrics/ClassLength
+      MOCK_LONG_RESPONSE = {
+        data: Array.new(100) do
+          {
+            id: 101693889,
+            created_at: '2018-03-13T00:39:59.820272-04:00',
+            updated_at: '2018-03-13T00:39:59.820272-04:00',
+            display_name: 'Orlando Stanton',
+            email_address: 'katrina_langosh@kozey.io',
+            title: 'Regional Factors Specialist'
+          }
+        end
+      }.freeze
+
+      MOCK_SHORT_RESPONSE = {
+        data: Array.new(75) do
+          {
+            id: 101693889,
+            created_at: '2018-03-13T00:39:59.820272-04:00',
+            updated_at: '2018-03-13T00:39:59.820272-04:00',
+            display_name: 'Orlando Stanton',
+            email_address: 'katrina_langosh@kozey.io',
+            title: 'Regional Factors Specialist'
+          }
+        end
+      }.freeze
+
+      def test_get_all_with_few_data
         stub_request(:get, TEST_URL)
           .with(
             headers: { Authorization: AUTH_HEADER },
-            query: { page: 1, per_page: 375 }
+            query: { page: 1, per_page: 100 }
           )
           .to_return(body: MOCK_RESPONSE.to_json)
 
@@ -118,11 +144,33 @@ module Application
         assert_equal 'Regional Factors Specialist', first_person[:title]
       end
 
+      def test_get_all_recursively
+        stub_request(:get, TEST_URL)
+          .with(
+            headers: { Authorization: AUTH_HEADER },
+            query: { page: 1, per_page: 100 }
+          )
+          .to_return(body: MOCK_LONG_RESPONSE.to_json)
+
+        stub_request(:get, TEST_URL)
+          .with(
+            headers: { Authorization: AUTH_HEADER },
+            query: { page: 2, per_page: 100 }
+          )
+          .to_return(body: MOCK_SHORT_RESPONSE.to_json)
+
+        gateway = Gateway.new TOKEN
+
+        response = gateway.all
+
+        assert_equal 175, response.size
+      end
+
       def test_unauthorized
         stub_request(:get, TEST_URL)
           .with(
             headers: { Authorization: AUTH_HEADER },
-            query: { page: 1, per_page: 375 }
+            query: { page: 1, per_page: 100 }
           )
           .to_return(status: 401)
 
@@ -137,7 +185,7 @@ module Application
         stub_request(:get, TEST_URL)
           .with(
             headers: { Authorization: AUTH_HEADER },
-            query: { page: 1, per_page: 375 }
+            query: { page: 1, per_page: 100 }
           )
           .to_return(status: 500)
 
@@ -152,7 +200,7 @@ module Application
         stub_request(:get, TEST_URL)
           .with(
             headers: { Authorization: AUTH_HEADER },
-            query: { page: 1, per_page: 375 }
+            query: { page: 1, per_page: 100 }
           )
           .to_return(status: 404)
 
@@ -167,7 +215,7 @@ module Application
         stub_request(:get, TEST_URL)
           .with(
             headers: { Authorization: AUTH_HEADER },
-            query: { page: 1, per_page: 375 }
+            query: { page: 1, per_page: 100 }
           )
           .to_return(body: 'Im not a valid answer')
 
