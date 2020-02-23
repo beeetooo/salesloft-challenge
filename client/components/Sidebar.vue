@@ -62,7 +62,6 @@ export default {
     },
 
     showFrequency: function () {
-      console.warn('si sera eda?')
       this.$emit('showFrequency');
     },
 

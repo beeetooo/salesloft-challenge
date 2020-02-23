@@ -11,10 +11,10 @@
       class="frequency__table-container"
     >
       <table align="center">
-        <th>
+        <thead>
           <td> Character </td>
           <td> Frequency </td>
-        </th>
+        </thead>
         <tr
           v-for="result in data"
           :key="result[0]"
@@ -48,9 +48,18 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .frequency__content-title {
   text-align: left;
   margin-left: 24px;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid white;
+  padding: 0 8px 0 8px;
 }
 </style>
