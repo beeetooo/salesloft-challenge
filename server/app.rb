@@ -6,6 +6,7 @@ require 'sinatra/cross_origin'
 require 'json'
 
 require 'server/gateways/people'
+require 'server/use-cases/get_emails_characters_frequency'
 
 module Application
   module Server
@@ -41,6 +42,13 @@ module Application
         [401, {}, 'Access to API unauthorized. Please contact your system administrator']
       rescue Application::People::GatewayError
         [500]
+      end
+
+      get '/frequency' do
+        gateway = Application::People::Gateway.new @api_token
+        use_case = Application::UseCases::GetEmailsCharactersFrequency.new gateway
+
+        { result: use_case.execute }.to_json
       end
 
       get '/favicon.ico' do
