@@ -38,3 +38,13 @@ export default {
   },
 }
 </script>
+
+<style lang="scss">
+.paginator__button {
+  cursor: pointer;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+</style>

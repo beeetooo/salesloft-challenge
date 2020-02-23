@@ -1,6 +1,11 @@
 <template>
-  <div class="people-container">
-    <div class="people-container__people">
+  <div class="people">
+    <h1 class="people__content-title">
+      People
+    </h1>
+    <div
+      class="people__people"
+    >
       <Person
         v-for="person in people"
         :key="person.email"
@@ -25,8 +30,8 @@
 <script>
 import axios from 'axios';
 
-import Paginator from '../components/Paginator.vue'
-import Person from '../components/Person.vue'
+import Paginator from '../components/Paginator.vue';
+import Person from '../components/Person.vue';
 
 export default {
   name: 'People',
@@ -54,42 +59,47 @@ export default {
   },
 
   mounted: async function () {
-    const response = await axios.get(
-      `http://localhost:5000/people?page=${this.page}&per_page=${this.perPage}`
-    );
-    this.people = response.data.results;
+    const people = await this.requestUsers(this.page, this.perPage);
+    this.people = people;
   },
 
   methods: {
     fetchPreviousPage: async function () {
       this.page = this.page - 1;
 
-      const response = await this.requestUsers(this.page, this.perPage);
-      this.people = response.data.results;
+      const people = await this.requestUsers(this.page, this.perPage);
+      this.people = people;
     },
 
     fetchNextPage: async function () {
       this.page = this.page + 1;
 
-      const response = await this.requestUsers(this.page, this.perPage);
-      this.people = response.data.results;
+      const people = await this.requestUsers(this.page, this.perPage);
+      this.people = people;
     },
 
     requestUsers: async function (page, perPage) {
-      return await axios.get(
+      const response = await axios.get(
         `http://localhost:5000/people?page=${page}&per_page=${perPage}`
       );
+
+      return response.data.results;
     }
   },
 }
 </script>
 
 <style lang="scss">
-.people-container__people {
+.people__people {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+}
+
+.people__content-title {
+  text-align: left;
+  margin-left: 24px;
 }
 
 .people__person {

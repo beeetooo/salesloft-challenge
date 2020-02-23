@@ -2,9 +2,6 @@
   <div id="app">
     <Sidebar />
     <div class="app__content">
-      <h1 class="app__content-title">
-        People
-      </h1>
       <People />
     </div>
   </div>
@@ -45,10 +42,5 @@ body {
 
 .app__content {
   margin-left: 20%;
-}
-
-.app__content-title {
-  text-align: left;
-  margin-left: 24px;
 }
 </style>
