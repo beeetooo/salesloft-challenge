@@ -2,7 +2,10 @@
 ![Back End Tests](https://github.com/beeetooo/salesloft-challenge/workflows/Ruby/badge.svg?branch=master)
 
 # Setup
-1. Create an `.env.development` file under the `envs` folder
+1. Create an `.env.development` file under the `envs` folder.
+```sh
+$ cp envs/env.sample .env.development
+```
 1. Set the authorization token for the SalesLoft API
 
 ## Running the Back End
@@ -10,11 +13,16 @@ There are two possible ways to run the back end
 1. `docker-compose`: You can run `docker-compose` up and the back end will be exposed at port 5000
 2. Setup the environment in your local machine
 ```sh
-$ brew install rbenv
-$ rbenv install 2.5.1
-$ gem install bundle
+# Install RVM
+$ \curl -sSL https://get.rvm.io | bash -s stable
+
+# Setup gemset for project dependencies
+$ rvm install "ruby-2.5.1"
+$ rvm gemset create salesloft-challenge
+$ rvm gemset use salesloft-challenge
+$ gem install bundler
 $ bundle install
-$ ./runserver.sh
+$ API_TOKEN=TheTokenGoesHere ./runserver.sh
 ```
 
 ## Running the Front End
@@ -123,7 +131,7 @@ Watching an overall design of the back end system with the respective use cases:
 ![alt text](.images/duplicated.png)
 
 
-### _Front End_
+### _Front End
 For the front end side, we can design a very simple 20/80 layout, similar to Jira or Confluence Layout, with a sidebar and the content section, having the following options in the sidebar:
 - People
 - Characters Frequency
