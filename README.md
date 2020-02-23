@@ -18,7 +18,18 @@ $ ./runserver.sh
 ```
 
 ## Running the Front End
+
 ```sh
+# Install NVM
+$ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
+
+# Add the following to your .bash_profile or .zshrc files
+$ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+# This will load the required node version to run the server
+$ nvm use
+
 $ npm install
 $ npm run serve
 ```
