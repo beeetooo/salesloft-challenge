@@ -3,8 +3,13 @@
     <h1 class="frequency__content-title">
       Frequency
     </h1>
-    <p v-if="isLoading"> Loading... </p>
-    <div v-else class="frequency__table-container">
+    <p v-if="isLoading">
+      Loading...
+    </p>
+    <div
+      v-else
+      class="frequency__table-container"
+    >
       <table align="center">
         <th>
           <td> Character </td>

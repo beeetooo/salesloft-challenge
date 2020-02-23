@@ -1,13 +1,17 @@
 <template>
   <section class="sidebar">
-    <img class="sidebar__logo" :src="logo" />
+    <img
+      class="sidebar__logo"
+      :src="logo"
+    >
     <ul class="sidebar__options">
       <li
         class="sidebar__option"
         :class="{
           'sidebar__option--active': active === 'people'
         }"
-        @click="showPeople">
+        @click="showPeople"
+      >
         People
       </li>
       <li
@@ -15,7 +19,8 @@
         :class="{
           'sidebar__option--active': active === 'frequency'
         }"
-        @click="showFrequency">
+        @click="showFrequency"
+      >
         Frequency
       </li>
       <li
@@ -23,7 +28,8 @@
         :class="{
           'sidebar__option--active': active === 'duplicated'
         }"
-        @click="showDuplicated">
+        @click="showDuplicated"
+      >
         Duplicated
       </li>
     </ul>
