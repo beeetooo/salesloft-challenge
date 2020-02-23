@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Person should match a snapshot 1`] = `
+<div class="person">
+  <div class="person__circle">
+    <p class="person__first-letter">
+      J
+    </p>
+  </div>
+  <div class="person__meta"><span class="person__name"> Juan Pablo </span> <span class="person__title"> Software Engineer </span> <span class="person__email"> juanpablo@gmail.com </span></div>
+</div>
+`;
